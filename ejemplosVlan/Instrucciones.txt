@@ -1,0 +1,11 @@
+//una vlan es una manera de agrupar dispositivos de manera logica dentro de un 
+//equipo de interconexion, por ejemplo, un switch
+//Dentro del cli de un switch del packet tracer ejecutar
+en //habilita el switch shortcut de enable
+config t //modo de configuracion global, shortcut de config terminal
+show vlan // Muestra las vlans actualmente creadas
+
+//Por default todos los dispositivos conectados pertenecen a la vlan "1 default".
+//Para que un dispositivo pertenezca a una vlan , se tiene que configurar el puerto
+//en el cual fue conectado en el switch , en la salida del comando "show vlan" , todos
+// los puertos pertenecen a la vlan 1
