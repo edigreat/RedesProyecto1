@@ -8,4 +8,25 @@ show vlan // Muestra las vlans actualmente creadas
 //Por default todos los dispositivos conectados pertenecen a la vlan "1 default".
 //Para que un dispositivo pertenezca a una vlan , se tiene que configurar el puerto
 //en el cual fue conectado en el switch , en la salida del comando "show vlan" , todos
-// los puertos pertenecen a la vlan 1
+// los puertos pertenecen a la vlan 1 hasta este momento
+
+//Para crear una vlan, dentro del cli del switch
+en
+config t 
+vlan 50 // Crea la vlan 50, se cambia el prompt
+name estudiantes //establece el nombre de la vlan recientemente creada
+exit // Sale de la configuracion , se pueden checar los cambios con "show vlan" para verificar la creacion
+
+//Si se requiere borrar la vlan es siquiente comando se ejecuta 
+no vlan 50
+
+//Para asignar un puerto a la vlan , se realiza lo siquiente en el cli del switch
+//Existen dos modos para configurar los puertos, 1 en modo access,que solo permite una sola vlan
+//la cual es indicada para dispositivos finales, y dos , en trunk, para que el puerto se pueda
+//configurar en 1 o mas vlan, indicadas para conectar switch a switch o switch a router
+
+conf t
+int fa0/10 //Puerto donde esta (o estara)  conectado el dispositivo a agregar a alguna vlan
+switchport mode access //se agrega puerto en modo access , 1 sola vlan
+switchport access vlan 50 // puerto en modo access a la vlan 50
+end
