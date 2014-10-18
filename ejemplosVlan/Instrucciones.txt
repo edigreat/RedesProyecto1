@@ -15,10 +15,11 @@ en
 config t 
 vlan 50 // Crea la vlan 50, se cambia el prompt
 name estudiantes //establece el nombre de la vlan recientemente creada
-exit // Sale de la configuracion , se pueden checar los cambios con "show vlan" para verificar la creacion
+end // Sale de la configuracion , se pueden checar los cambios con "show vlan" para verificar la creacion
 
 //Si se requiere borrar la vlan es siquiente comando se ejecuta 
-no vlan 50
+no vlan 50 //Hay que tener cuidado, ya que cuando se borrar una vlan, los puertos asignados anteriormente
+		   //se quedan con esa vlan , se tienen que reasignar de vlan 
 
 //Para asignar un puerto a la vlan , se realiza lo siquiente en el cli del switch
 //Existen dos modos para configurar los puertos, 1 en modo access,que solo permite una sola vlan
@@ -26,7 +27,19 @@ no vlan 50
 //configurar en 1 o mas vlan, indicadas para conectar switch a switch o switch a router
 
 conf t
-int fa0/10 //Puerto donde esta (o estara)  conectado el dispositivo a agregar a alguna vlan
+int fa0/10 //Puerto donde esta (o estara)  conectado el dispositivo a 
+           //agregar a alguna vlan, shortcut de interface fastethernet 0/10
 switchport mode access //se agrega puerto en modo access , 1 sola vlan
 switchport access vlan 50 // puerto en modo access a la vlan 50
-end
+end // Tambien puede ser ctrl + c
+
+//Se pueden verificar  los cambios con show vlan
+//En caso de que se deseen configurar varios puertos
+conf t
+interface range fastethernet 0/15 - 24 //Rango de puertos a agregar 
+switchport mode access //se agrega puerto en modo access , 1 sola vlan
+switchport access vlan 50 // puertos en modo access a la vlan 50
+end // Tambien puede ser ctrl + c
+
+//Tambien se pueden verificar con el comando
+show interface status
