@@ -1,5 +1,5 @@
 //una vlan es una manera de agrupar dispositivos de manera logica dentro de un 
-//equipo de interconexion, por ejemplo, un switch
+//equipo de interconexion, por ejemplo, un switch, para este ejemplo , el switch 2950
 //Dentro del cli de un switch del packet tracer ejecutar
 en //habilita el switch shortcut de enable
 config t //modo de configuracion global, shortcut de config terminal
@@ -43,3 +43,26 @@ end // Tambien puede ser ctrl + c
 
 //Tambien se pueden verificar con el comando
 show interface status
+//Tambien con 
+show running-config
+
+//En este paso se pueden conectar dos pc's a el switch , crear 2 vlans, agregar los puertos a la vlan
+// conectar las pc's a los puertos y verificar con pings, tal vez sea necesarios establecer las ip's de las
+//pc's 
+
+
+//La configuracion de un puerto en modo trunk es para internectar dos dispositivos de interconexion, 
+//por ejemplo,  se conectaran 2 switch 2950 con cable cruzado 
+//en cada switch ejecutar 
+en
+conf t
+int fa0/1  // Puerto donde esta conectado del switch
+switchport mode trunk //puerto 0/1 en modo trunk
+switchport trunk allowed vlan 1-99 //por ese puerto permite las vlan de 1-99
+end
+
+//Se puede verificar con 
+show running-config
+//tambien con
+show interfaces trunk 
+
