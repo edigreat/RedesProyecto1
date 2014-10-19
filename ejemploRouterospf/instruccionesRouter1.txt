@@ -1,0 +1,40 @@
+//Ejemplo Router
+//cli del router
+show ip route
+//Ninguna routa hasta el momento, tambien con show running-config
+//Configurar una interface en el router
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#in Fa0/0
+Router(config-if)#ip address 192.168.10.1 255.255.255.0
+Router(config-if)#no shutdown
+end
+//Esto se hace por interface, si tengo otra subnet
+//tengo que conectar otro cable y volver a configurarlo
+//para ver las tablas de route
+show arp
+//Agregar interfaces fisicas a cada router y conectarlos
+//Definir subnetting entre los routers
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int s0/1/0
+Router(config-if)#ip address 192.168.82.1 255.255.255.0
+Router(config-if)#no shutdown
+//Verificar con show ip route hasta que esten las dos configuradas
+//Verificar las interfaces
+show ip int brief
+
+//Para activar ospf en el router
+
+Router>en
+Router#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#router ospf 1 //activa  ospf , 1 es # de proceso
+Router(config-router)#network 192.168.0.0 0.0.255.255 area 0 //wild card , todas las subredes con 192.168. y se agrupan en el area 0
+ctrl +c 
+//Para verififar cambios
+show ip ospf neighbor
+show ip protocol
+show ip ospf database 
+
+

@@ -1,0 +1,3 @@
+//Ejemplo router 2
+//Las pc's que estan en el mismo subnet, no pasan
+//por el router

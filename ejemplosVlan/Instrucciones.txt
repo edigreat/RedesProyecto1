@@ -42,7 +42,7 @@ switchport access vlan 50 // puertos en modo access a la vlan 50
 end // Tambien puede ser ctrl + c
 
 //Tambien se pueden verificar con el comando
-show interface status
+show interfaces status
 //Tambien con 
 show running-config
 
@@ -64,5 +64,48 @@ end
 //Se puede verificar con 
 show running-config
 //tambien con
-show interfaces trunk 
+show interfaces trunk
+// tambien con
+show interface switchport
+
+//el protocolo 802.1Q pone etiquetas para saber que paquete pertenece
+// a que vlan, en caso de que exista un dispositivo que no soporte
+//el protocolo, se van por la native vlan para cambiarla
+//en un switch, esto hacerlo por cada vlan de trunk o hacerlo por un rango
+en
+conf t
+vlan 80
+name native
+end
+conf t
+int fa0/1 // configuramos para que la native vlan tome el puerto 1
+switchport trunk native vlan 80
+end
+
+//Deshabilitar puertos , cuestiones de seguridad , se habilitan conforme se necesitan 
+int range Fa0/1 - 24 
+shutdown
+
+
+//Vlan administracion
+//Para realizar la administracion de los switch, se puede realizar una  vlan 
+//unicamente para administracion , para lo cual se necesita que el switch
+//tenga una direccion ip y se puede accesar mediante una pc con telnet o ssh 
+
+conf t
+interface vlan 99 // es una interface del switch para la vlan 99, suponiendo que ya esta creada
+ip address 192.168.99.2 255.255.255.0
+no shutdown //para activar el puerto
+end
+
+//Lo siguiente es habilitar el acceso remoto, dentro del cli del switch, 
+//se habilita telnet para aceeso virtual
+conf t
+line vty 0 15 //Habilita telnet para acceso virtual
+password cisco // password cisco
+login // habilita  login
+end
+conf t
+enable secret cisco // privilegios de configuracion, si no se habilita no permite enable
+
 
